@@ -1,1 +1,1 @@
-# ELK-stack-helm
+# Elasticsearch, Logstash, and Kibana on Kubernetes

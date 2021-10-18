@@ -1,0 +1,6 @@
+$ kubectl create deployment kib-pod --image kibana:7.8.0
+
+[Output]
+deployment.apps/kib-poc created
+
+

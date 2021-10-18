@@ -1,0 +1,43 @@
+$ kubectl create deployment es-poc --image elasticsearch:7.8.0
+
+[Output]
+deployment.apps/es-poc created
+
+$ kubectl edit deploy es-poc
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+spec:
+  template:
+    spec:
+      containers:
+      - env:
+        - name: discovery.type
+          value: single-node
+	ports:
+        - containerPort: 9200
+          protocol: TCP
+
+$ kubectl expose deployment es-manual --type NodePort --port 9200
+
+// May need to tunnel if on minikube "minikube service --url <service-name>"
+
+[Output]
+{
+  "name" : "es-poc-5f5864f9c9-96hp4",
+  "cluster_name" : "docker-cluster",
+  "cluster_uuid" : "j2KM71yoTL2rF6RAaDhPEQ",
+  "version" : {
+    "number" : "7.8.0",
+    "build_flavor" : "default",
+    "build_type" : "docker",
+    "build_hash" : "757314695644ea9a1dc2fecd26d1a43856725e65",
+    "build_date" : "2020-06-14T19:35:50.234439Z",
+    "build_snapshot" : false,
+    "lucene_version" : "8.5.1",
+    "minimum_wire_compatibility_version" : "6.8.0",
+    "minimum_index_compatibility_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
